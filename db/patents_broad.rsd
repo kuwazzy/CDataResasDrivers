@@ -1,0 +1,18 @@
+<rsb:script>
+  <rsb:info title="patents_broad" desc="特許.技術分野" >
+
+    <attr name="tecCode" xs:type="string" key="TRUE" other:xPath="/json/result/tecCode" desc="セクションコード" />
+    <attr name="tecName" xs:type="string" other:xPath="/json/result/tecName" desc="セクション名" />
+
+  </rsb:info>
+
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/patents/broad" />
+  <rsb:set attr="RepeatElement" value="/json/result" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

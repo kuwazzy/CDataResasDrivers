@@ -1,0 +1,22 @@
+<rsb:script>
+  <rsb:info title="customs" desc="税関" >
+
+    <attr name="customHouseCd" xs:type="string" key="TRUE" other:xPath="/json/result/customHouseCd" desc="税関空港コード" />
+    <attr name="customHouseName" xs:type="string" other:xPath="/json/result/customHouseName" desc="税関空港名" />
+    <attr name="prefCode" xs:type="string" key="TRUE" other:xPath="/json/result/prefCode" desc="都道府県コード" />
+    <attr name="prefName" xs:type="string" other:xPath="/json/result/prefName" desc="都道府県名" />
+
+    <input name="prefCode" xs:type="string" required="TRUE" desc="都道府県コード" />
+
+  </rsb:info>
+
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/customs?prefCode=[_input.prefCode]" />
+  <rsb:set attr="RepeatElement" value="/json/result" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

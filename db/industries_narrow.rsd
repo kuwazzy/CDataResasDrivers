@@ -1,0 +1,21 @@
+<rsb:script>
+  <rsb:info title="industries_narrow" desc="産業小分類" >
+
+    <attr name="simcCode" xs:type="string" key="TRUE" other:xPath="/json/result/simcCode" desc="産業中分類コード" />
+    <attr name="siscCode" xs:type="string" key="TRUE" other:xPath="/json/result/siscCode" desc="産業小分類コード" />
+    <attr name="siscName" xs:type="string" other:xPath="/json/result/siscName" desc="産業小分類名" />
+
+    <input name="simcCode" xs:type="string" required="TRUE" desc="産業中分類コード" />
+
+  </rsb:info>
+
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/industries/narrow?simcCode=[_input.simcCode]" />
+  <rsb:set attr="RepeatElement" value="/json/result" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

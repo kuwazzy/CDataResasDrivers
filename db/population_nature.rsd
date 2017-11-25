@@ -1,0 +1,31 @@
+<rsb:script>
+  <rsb:info title="population_nature" desc="人口の自然増減" >
+
+    <attr name="line_boundaryYear" xs:type="string" other:xPath="/json/result/line/boundaryYear" desc="実績値と将来の推計値の区切り年" />
+    <attr name="line_data_year" xs:type="string" other:xPath="/json/result/line/data/year" desc="年" />
+    <attr name="line_data_yearRange" xs:type="string" other:xPath="/json/result/line/data/yearRange" desc="年度範囲" />
+    <attr name="line_data_value" xs:type="double" other:xPath="/json/result/line/data/value" desc="合計特殊出生率" />
+    <attr name="bar_boundaryYear" xs:type="string" other:xPath="/json/result/bar/boundaryYear" desc="実績値と将来の推計値の区切り年" />
+    <attr name="bar_mandata_year" xs:type="string" other:xPath="/json/result/bar/mandata/year" desc="年度" />
+    <attr name="bar_mandata_value" xs:type="double" other:xPath="/json/result/bar/mandata/value" desc="人数(千人)" />
+    <attr name="bar_womandata_year" xs:type="string" other:xPath="/json/result/bar/womandata/year" desc="年度" />
+    <attr name="bar_womandata_value" xs:type="double" other:xPath="/json/result/bar/womandata/value" desc="人数(千人)" />
+
+    <input name="prefCode" xs:type="string" required="TRUE" desc="都道府県コード" />
+    <input name="cityCode" xs:type="string" required="TRUE" desc="市区町村コード" />
+    <input name="ageFrom" xs:type="string" required="TRUE" desc="表示する年齢(開始)" />
+    <input name="ageTo" xs:type="string" required="TRUE" desc="表示する年齢(終了)" />
+
+  </rsb:info>
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/population/nature?prefCode=[_input.prefCode]&cityCode=[_input.cityCode]&ageFrom=[_input.ageFrom]&ageTo=[_input.ageTo]" />
+  <rsb:set attr="RepeatElement#1" value="/json/result/line/data" />
+  <rsb:set attr="RepeatElement#2" value="/json/result/bar/mandata" />
+  <rsb:set attr="RepeatElement#3" value="/json/result/bar/womandata" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

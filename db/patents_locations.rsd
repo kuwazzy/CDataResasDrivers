@@ -1,0 +1,26 @@
+<rsb:script>
+  <rsb:info title="patents_locations" desc="特許権者の所在地" >
+
+    <attr name="prefCode" xs:type="string" other:xPath="/json/result/prefCode" desc="都道府県コード" />
+    <attr name="prefName" xs:type="string" other:xPath="/json/result/prefName" desc="都道府県名" />
+    <attr name="cityCode" xs:type="string" other:xPath="/json/result/cityCode" desc="市区町村コード" />
+    <attr name="cityName" xs:type="string" other:xPath="/json/result/cityName" desc="市区町村名" />
+    <attr name="id" xs:type="string" key="TRUE" other:xPath="/json/result/id" desc="場所ID" />
+    <attr name="latitude" xs:type="double" other:xPath="/json/result/latitude" desc="緯度" />
+    <attr name="longitude" xs:type="double" other:xPath="/json/result/longitude" desc="経度" />
+
+    <input name="prefCode" xs:type="string" required="TRUE" desc="都道府県コード" />
+    <input name="cityCode" xs:type="string" required="TRUE" desc="市区町村コード" />
+
+  </rsb:info>
+
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/patents/locations?prefCode=[_input.prefCode]&cityCode=[_input.cityCode]" />
+  <rsb:set attr="RepeatElement" value="/json/result" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

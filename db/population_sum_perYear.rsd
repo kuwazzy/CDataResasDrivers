@@ -1,0 +1,28 @@
+<rsb:script>
+  <rsb:info title="population_sum_perYear" desc="人口増減率" >
+
+    <attr name="line_boundaryYear" xs:type="string" other:xPath="/json/result/line/boundaryYear" desc="" />
+    <attr name="line_data_year" xs:type="string" other:xPath="/json/result/line/data/year" desc="" />
+    <attr name="line_data_value" xs:type="double" other:xPath="/json/result/line/data/value" desc="" />
+    <attr name="bar_data_year" xs:type="string" other:xPath="/json/result/bar/data/year" desc="" />
+    <attr name="bar_data_sum" xs:type="double" other:xPath="/json/result/bar/data/sum" desc="" />
+    <attr name="bar_data_class_label" xs:type="string" other:xPath="/json/result/bar/data/class/label" desc="" />
+    <attr name="bar_data_class_value" xs:type="double" other:xPath="/json/result/bar/data/class/value" desc="" />
+
+    <input name="prefCode" xs:type="string" required="TRUE" desc="都道府県コード" />
+    <input name="cityCode" xs:type="string" required="TRUE" desc="市区町村コード" />
+
+  </rsb:info>
+
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/population/sum/perYear?prefCode=[_input.prefCode]&cityCode=[_input.cityCode]" />
+  <rsb:set attr="RepeatElement#1" value="/json/result/line/data" />
+  <rsb:set attr="RepeatElement#2" value="/result/bar/data" />
+  <rsb:set attr="SubRepeatElement#2" value="/result/bar/data/data" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

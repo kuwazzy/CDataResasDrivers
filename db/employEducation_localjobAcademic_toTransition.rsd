@@ -1,0 +1,26 @@
+<rsb:script>
+  <rsb:info title="employEducation_localjobAcademic_toTransition" desc="就職者数・進学者数の推移" >
+
+    <attr name="changes_label" xs:type="string" other:xPath="/json/result/changes/label" desc="対象の県名" />
+    <attr name="changes_prefCode" xs:type="string" key="TRUE" other:xPath="/json/result/changes/prefCode" desc="対象の県名" />
+    <attr name="changes_data_year" xs:type="string" key="TRUE" other:xPath="/json/result/changes/data/year" desc="年度" />
+    <attr name="changes_data_value" xs:type="double" other:xPath="/json/result/changes/data/value" desc="1 年度分の推移" />
+
+    <input name="prefecture_cd" xs:type="string" required="TRUE" desc="都道府県コード" />
+    <input name="displayMethod" xs:type="string" required="TRUE" desc="表示方法" />
+    <input name="matter" xs:type="string" required="TRUE" desc="表示内容" />
+    <input name="classification" xs:type="string" required="TRUE" desc="表示分類" />
+    <input name="displayType" xs:type="string" required="TRUE" desc="表示区分" />
+    <input name="gender" xs:type="string" required="TRUE" desc="性別" />
+
+  </rsb:info>
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/employEducation/localjobAcademic/toTransition?prefecture_cd=[_input.prefecture_cd]&displayMethod=[_input.displayMethod]&matter=[_input.matter]&classification=[_input.classification]&displayType=[_input.displayType]&gender=[_input.gender]" />
+  <rsb:set attr="RepeatElement" value="/json/result/changes/data" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

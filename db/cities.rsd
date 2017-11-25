@@ -1,0 +1,22 @@
+<rsb:script>
+  <rsb:info title="cities" desc="市区町村一覧" >
+
+    <attr name="prefCode" xs:type="string" key="TRUE" other:xPath="/json/result/prefCode" desc="都道府県コード" />
+    <attr name="cityCode" xs:type="string" key="TRUE" other:xPath="/json/result/cityCode" desc="市区町村コード" />
+    <attr name="cityName" xs:type="string" other:xPath="/json/result/cityName" desc="市区町村名" />
+    <attr name="bigCityFlag" xs:type="string" other:xPath="/json/result/bigCityFlag" desc="特別区・行政区フラグ" />
+
+    <input name="prefCode" xs:type="string" required="TRUE" desc="都道府県コード" />
+
+  </rsb:info>
+
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=[_input.prefCode]" />
+  <rsb:set attr="RepeatElement" value="/json/result" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

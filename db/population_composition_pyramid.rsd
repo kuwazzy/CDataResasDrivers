@@ -1,0 +1,46 @@
+<rsb:script>
+  <rsb:info title="population_composition_pyramid" desc="人口ピラミッド" >
+
+    <attr name="yearLeft_year" xs:type="string" other:xPath="/json/result/yearLeft/year" desc="yearLeftで指定された年" />
+    <attr name="yearLeft_oldAgeCount" xs:type="double" other:xPath="/json/result/yearLeft/oldAgeCount" desc="65歳以上の老年人口(人)" />
+    <attr name="yearLeft_oldAgePercent" xs:type="double" other:xPath="/json/result/yearLeft/oldAgePercent" desc="65歳以上の老年人口(パーセント)" />
+    <attr name="yearLeft_middleAgeCount" xs:type="double" other:xPath="/json/result/yearLeft/middleAgeCount" desc="15歳～64歳の生産年齢人口(人)" />
+    <attr name="yearLeft_middleAgePercent" xs:type="double" other:xPath="/json/result/yearLeft/middleAgePercent" desc="15歳～64歳の生産年齢人口(パーセント)" />
+    <attr name="yearLeft_newAgeCount" xs:type="double" other:xPath="/json/result/yearLeft/newAgeCount" desc="0歳～14歳の年少人口(人)" />
+    <attr name="yearLeft_newAgePercent" xs:type="double" other:xPath="/json/result/yearLeft/newAgePercent" desc="0歳～14歳の年少人口(パーセント)" />
+    <attr name="yearLeft_data_class" xs:type="string" other:xPath="/json/result/yearLeft/data/class" desc="年齢階級" />
+    <attr name="yearLeft_data_man" xs:type="double" other:xPath="/json/result/yearLeft/data/man" desc="男性人口(人)" />
+    <attr name="yearLeft_data_manPercent" xs:type="double" other:xPath="/json/result/yearLeft/data/manPercent" desc="男性人口(パーセント)" />
+    <attr name="yearLeft_data_woman" xs:type="double" other:xPath="/json/result/yearLeft/data/woman" desc="女性人口(人)" />
+    <attr name="yearLeft_data_womanPercent" xs:type="double" other:xPath="/json/result/yearLeft/data/womanPercent" desc="女性人口(パーセント)" />
+    <attr name="yearRight_year" xs:type="string" other:xPath="/json/result/yearRight/year" desc="yearRightで指定された年" />
+    <attr name="yearRight_oldAgeCount" xs:type="double" other:xPath="/json/result/yearRight/oldAgeCount" desc="老年人口(人). 老年人口 : 65歳以上" />
+    <attr name="yearRight_oldAgePercent" xs:type="double" other:xPath="/json/result/yearRight/oldAgePercent" desc="老年人口(パーセント). 老年人口 : 65歳以上" />
+    <attr name="yearRight_middleAgeCount" xs:type="double" other:xPath="/json/result/yearRight/middleAgeCount" desc="生産年齢人口(人). 生産年齢人口 : 15歳～64歳" />
+    <attr name="yearRight_middleAgePercent" xs:type="double" other:xPath="/json/result/yearRight/middleAgePercent" desc="生産年齢人口(パーセント). 生産年齢人口 : 15歳～64歳" />
+    <attr name="yearRight_newAgeCount" xs:type="double" other:xPath="/json/result/yearRight/newAgeCount" desc="年少人口(人). 年少人口 : 0歳～14歳" />
+    <attr name="yearRight_newAgePercent" xs:type="double" other:xPath="/json/result/yearRight/newAgePercent" desc="年少人口(パーセント). 年少人口 : 0歳～14歳" />
+    <attr name="yearRight_data_class" xs:type="string" other:xPath="/json/result/yearRight/data/class" desc="年齢階級" />
+    <attr name="yearRight_data_man" xs:type="double" other:xPath="/json/result/yearRight/data/man" desc="男性人口(人)" />
+    <attr name="yearRight_data_manPercent" xs:type="double" other:xPath="/json/result/yearRight/data/manPercent" desc="男性人口(パーセント)" />
+    <attr name="yearRight_data_woman" xs:type="double" other:xPath="/json/result/yearRight/data/woman" desc="女性人口(人)" />
+    <attr name="yearRight_data_womanPercent" xs:type="double" other:xPath="/json/result/yearRight/data/womanPercent" desc="女性人口(パーセント)" />
+
+    <input name="prefCode" xs:type="string" required="TRUE" desc="都道府県コード" />
+    <input name="cityCode" xs:type="string" required="TRUE" desc="市区町村コード" />
+    <input name="yearLeft" xs:type="string" required="TRUE" desc="年度1(左側)" />
+    <input name="yearRight" xs:type="string" required="TRUE" desc="年度2(右側)" />
+
+  </rsb:info>
+
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/population/composition/pyramid?prefCode=[_input.prefCode]&cityCode=[_input.cityCode]&yearLeft=[_input.yearLeft]&yearRight=[_input.yearRight]" />
+  <rsb:set attr="RepeatElement#1" value="/json/result/yearLeft/data" />
+  <rsb:set attr="RepeatElement#2" value="/json/result/yearRight/data" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

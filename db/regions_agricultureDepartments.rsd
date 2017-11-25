@@ -1,0 +1,18 @@
+<rsb:script>
+  <rsb:info title="regions_agricultureDepartments" desc="農業部門" >
+
+    <attr name="sectionCode" xs:type="string" key="TRUE" other:xPath="/json/result/sectionCode" desc="農業部門コード" />
+    <attr name="sectionName" xs:type="string" other:xPath="/json/result/sectionName" desc="農業部門名" />
+
+  </rsb:info>
+
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/regions/agricultureDepartments" />
+  <rsb:set attr="RepeatElement" value="/json/result" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

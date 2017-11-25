@@ -1,0 +1,18 @@
+<rsb:script>
+  <rsb:info title="regions_broad" desc="輸出入花火図.取引国_地域" >
+
+    <attr name="regionCode" xs:type="string" key="TRUE" other:xPath="/json/result/regionCode" desc="地域コード" />
+    <attr name="regionName" xs:type="string" other:xPath="/json/result/regionName" desc="地域名" />
+
+  </rsb:info>
+
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/regions/broad" />
+  <rsb:set attr="RepeatElement" value="/json/result" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

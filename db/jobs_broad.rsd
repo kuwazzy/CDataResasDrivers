@@ -1,0 +1,18 @@
+<rsb:script>
+  <rsb:info title="jobs_broad" desc="職業大分類" >
+
+    <attr name="iscoCode" xs:type="string" key="TRUE" other:xPath="/json/result/iscoCode" desc="職業大分類コード" />
+    <attr name="iscoName" xs:type="string" other:xPath="/json/result/iscoName" desc="職業大分類名" />
+
+  </rsb:info>
+
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/jobs/broad" />
+  <rsb:set attr="RepeatElement" value="/json/result" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

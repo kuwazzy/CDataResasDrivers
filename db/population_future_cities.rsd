@@ -1,0 +1,23 @@
+<rsb:script>
+  <rsb:info title="population_future_cities" desc="将来人口推計" >
+
+    <attr name="cities_cityCode" xs:type="string" key="TRUE" other:xPath="/json/result/cities/cityCode" desc="市区町村コード" />
+    <attr name="cities_cityName" xs:type="string" other:xPath="/json/result/cities/cityName" desc="市区町村名" />
+    <attr name="cities_value" xs:type="double" other:xPath="/json/result/cities/value" desc="" />
+    <attr name="cities_ratio" xs:type="double" other:xPath="/json/result/cities/ratio" desc="若年女性人口減少率" />
+
+    <input name="year" xs:type="string" required="TRUE" desc="年度" />
+    <input name="prefCode" xs:type="string" required="TRUE" desc="都道府県コード" />
+
+  </rsb:info>
+
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/population/future/cities?year=[_input.year]&prefCode=[_input.prefCode]" />
+  <rsb:set attr="RepeatElement" value="/json/result/cities" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

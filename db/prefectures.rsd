@@ -1,0 +1,18 @@
+<rsb:script>
+  <rsb:info title="prefectures" desc="都道府県一覧" >
+
+    <attr name="prefCode" xs:type="string" key="TRUE" other:xPath="/json/result/prefCode" desc="都道府県コード" />
+    <attr name="prefName" xs:type="string" other:xPath="/json/result/prefName" desc="都道府県名" />
+
+  </rsb:info>
+
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/prefectures" />
+  <rsb:set attr="RepeatElement" value="/json/result" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

@@ -1,0 +1,22 @@
+<rsb:script>
+  <rsb:info title="patents_middle" desc="特許.技術テーマ" >
+
+    <attr name="tecCode" xs:type="string" key="TRUE" other:xPath="/json/result/tecCode" desc="セクションコード" />
+    <attr name="tecName" xs:type="string" other:xPath="/json/result/tecName" desc="セクション名" />
+    <attr name="themeCode" xs:type="string" key="TRUE" other:xPath="/json/result/themeCode" desc="主題事項コード" />
+    <attr name="themeName" xs:type="string" other:xPath="/json/result/themeName" desc="主題事項名" />
+
+    <input name="tecCode" xs:type="string" required="TRUE" desc="セクションコード" />
+
+  </rsb:info>
+
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/patents/middle?tecCode=[_input.tecCode]" />
+  <rsb:set attr="RepeatElement" value="/json/result" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

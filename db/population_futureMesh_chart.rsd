@@ -1,0 +1,32 @@
+<rsb:script>
+  <rsb:info title="population_futureMesh_chart" desc="将来人口区分メッシュ度数分布図" >
+
+    <attr name="prefCode" xs:type="string" other:xPath="/json/result/prefCode" desc="対象の県コード" />
+    <attr name="prefName" xs:type="string" other:xPath="/json/result/prefName" desc="対象の県名" />
+    <attr name="cityCode" xs:type="string" key="TRUE" other:xPath="/json/result/cityCode" desc="対象の市区町村コード" />
+    <attr name="cityName" xs:type="string" other:xPath="/json/result/cityName" desc="対象の市区町村名" />
+    <attr name="year" xs:type="string" key="TRUE" other:xPath="/json/result/year" desc="年" />
+    <attr name="displayMethod" xs:type="string" key="TRUE" other:xPath="/json/result/displayMethod" desc="表示方法" />
+    <attr name="data_classification_cd" xs:type="string" key="TRUE" other:xPath="/json/result/data/classification_cd" desc="区分ランク" />
+    <attr name="data_classification_name" xs:type="string" other:xPath="/json/result/data/classification_name" desc="区分表示名" />
+    <attr name="data_value1" xs:type="double" other:xPath="/json/result/data/value1" desc="メッシュ数の値" />
+    <attr name="data_value2" xs:type="double" other:xPath="/json/result/data/value2" desc="メッシュ累積度数の値" />
+    <attr name="data_value3" xs:type="double" other:xPath="/json/result/data/value3" desc="人口累積度数の値" />
+
+    <input name="year" xs:type="string" required="TRUE" desc="年度" />
+    <input name="prefCode" xs:type="string" required="TRUE" desc="都道府県コード" />
+    <input name="city_cd" xs:type="string" required="TRUE" desc="市区町村コード" />
+    <input name="displayMethod" xs:type="string" required="TRUE" desc="表示方法" />
+
+  </rsb:info>
+
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/population/futureMesh/chart?year=[_input.year]&prefecture_cd=[_input.prefCode]&city_cd=[_input.city_cd]&displayMethod=[_input.displayMethod]" />
+  <rsb:set attr="RepeatElement" value="/json/result/data" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

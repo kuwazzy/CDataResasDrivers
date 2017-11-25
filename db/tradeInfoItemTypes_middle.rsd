@@ -1,0 +1,22 @@
+<rsb:script>
+  <rsb:info title="tradeInfoItemTypes_middle" desc="輸出入花火図.品目_中分類" >
+
+    <attr name="itemCode1" xs:type="string" key="TRUE" other:xPath="/json/result/itemCode1" desc="商品大分類コード" />
+    <attr name="itemName1" xs:type="string" other:xPath="/json/result/itemName1" desc="商品大分類名" />
+    <attr name="itemCode2" xs:type="string" key="TRUE" other:xPath="/json/result/itemCode2" desc="商品中分類コード" />
+    <attr name="itemName2" xs:type="string" other:xPath="/json/result/itemName2" desc="商品中分類名" />
+
+    <input name="itemCode1" xs:type="string" required="TRUE" desc="品目_大分類コード" />
+
+  </rsb:info>
+
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/tradeInfoItemTypes/middle?itemCode1=[_input.itemCode1]" />
+  <rsb:set attr="RepeatElement" value="/json/result" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>

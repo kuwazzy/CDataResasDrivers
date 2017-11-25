@@ -1,0 +1,24 @@
+<rsb:script>
+  <rsb:info title="population_sum_estimate" desc="出生数・死亡数／転入数・転出数" >
+
+    <attr name="boundaryYear" xs:type="string" key="TRUE" other:xPath="/json/result/boundaryYear" desc="実績値と推計値の区切り年" />
+    <attr name="data_label" xs:type="string" key="TRUE" other:xPath="/json/result/data/label" desc="ラベル + 総人口・転入数・転出数・出生数・死亡数" />
+    <attr name="data_data_year" xs:type="string" key="TRUE" other:xPath="/json/result/data/data/year" desc="年" />
+    <attr name="data_data_value" xs:type="double" other:xPath="/json/result/data/data/value" desc="人口(千人)" />
+
+    <input name="prefCode" xs:type="string" required="TRUE" desc="都道府県コード" />
+    <input name="cityCode" xs:type="string" required="TRUE" desc="市区町村コード" />
+
+  </rsb:info>
+
+  <rsb:set attr="uri" value="https://opendata.resas-portal.go.jp/api/v1/population/sum/estimate?prefCode=[_input.prefCode]&cityCode=[_input.cityCode]" />
+  <rsb:set attr="RepeatElement" value="/json/result/data" />
+  <rsb:set attr="SubRepeatElement" value="/json/result/data/data" />
+  <rsb:set attr="ContentType" value="application/json" />
+
+  <rsb:script method="GET" >
+    <rsb:call op="jsonproviderGet">
+      <rsb:push/>
+    </rsb:call>
+  </rsb:script>
+</rsb:script>
