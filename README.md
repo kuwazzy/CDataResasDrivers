@@ -1,4 +1,4 @@
-# CDataResasDrivers
+# ResasDef4CDataJSONDrivers
 地域経済分析システム（RESAS：リーサス）用CData JSON Drivers定義
 
 ## はじめに
